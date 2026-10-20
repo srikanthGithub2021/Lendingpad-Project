@@ -12,7 +12,16 @@ namespace Core.Services.Users
             user.SetEmail(email);
             user.SetName(name);
             user.SetType(type);
-            user.SetMonthlySalary(annualSalary.Value / 12);
+       
+            // Getting actual error in this and adding a logic for value check
+            if (annualSalary.HasValue)
+            {
+                user.SetMonthlySalary(annualSalary.Value / 12);
+            }
+            else
+            {
+                user.SetMonthlySalary((decimal?)null);
+            }
             user.SetTags(tags);
         }
     }
