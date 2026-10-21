@@ -29,6 +29,7 @@ namespace WebApi
 
             container.RegisterWebApiControllers(config);
 
+
             container.Verify();
 
             config.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
