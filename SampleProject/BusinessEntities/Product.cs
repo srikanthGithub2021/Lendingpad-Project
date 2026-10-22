@@ -93,6 +93,20 @@ namespace BusinessEntities
             _isActive = isActive;
         }
 
+        public void ReduceStock(int qty)
+        {
+            if(qty<=0)
+            {
+                throw new ArgumentException("Quantity must be greater than zero");
+
+            }
+            if(_stockQuantity<qty)
+            {
+                throw new InvalidOperationException("Insufficent stock for the product you seleted");
+            }
+            _stockQuantity -= qty;
+        }
+
     }
 
 
