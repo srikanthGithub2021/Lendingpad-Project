@@ -77,17 +77,18 @@ namespace WebApi.Controllers
 
         [Route("list")]
         [HttpGet]
-        public HttpResponseMessage GetProducts(int skip, int take, string productName = null, ProductCategory? category = null, bool isActive = false)
+        public HttpResponseMessage GetProducts(int skip, int take, string productName = null, ProductCategory? category = null, bool? isActive = null)
         {
 
             var products = _getProductService.GetProducts(productName, category, isActive)
                                              .Skip(skip).Take(take)
                                              .Select(p => new ProductData(p))
                                              .ToList();
-            if (products == null)
-            {
-                return DoesNotExist();
-            }
+            //if (products == null ||products.Count==0)
+            //{
+
+            //    return Request.CreateResponse(HttpStatusCode.OK, products);
+            //}
 
             return Found(products);
 
@@ -95,9 +96,9 @@ namespace WebApi.Controllers
 
         [Route("Clear")]
         [HttpDelete]
-        public HttpResponseMessage DeleteAllProducts(bool confirm=false)
+        public HttpResponseMessage DeleteAllProducts()
         {
-            _deleteProductService.DeleteAll(confirm);
+            _deleteProductService.DeleteAll(confirm:true);
             return Found();
 
         }
@@ -107,14 +108,15 @@ namespace WebApi.Controllers
         public HttpResponseMessage DeletePrduct(Guid productId)
         {
             var product=_getProductService.GetProduct(productId);
+
             if (product == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, $"No Product found for productId: {productId}");
             }
 
             _deleteProductService.Delete(product);
-            return Request.CreateResponse(HttpStatusCode.NotFound, $"Product deleted successfully  for productId: {productId}");
-            
+            return Found();
+
         }
 
     }

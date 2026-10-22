@@ -23,7 +23,7 @@ namespace Core.Services.Products
         }
 
 
-        public IEnumerable<Product> GetProducts(string productName = null, ProductCategory? category = null, bool isActive = false)
+        public IEnumerable<Product> GetProducts(string productName = null, ProductCategory? category = null, bool? isActive = null)
         {
             return _productRepository.Get(productName,category,isActive);
         }

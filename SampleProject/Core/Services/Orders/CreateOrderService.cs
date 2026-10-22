@@ -25,12 +25,13 @@ namespace Core.Services.Orders
             _updateOrderService = updateOrderService;
         }
 
-        public Order Create(Guid customerId, string customerName, IEnumerable<OrderItem> items, string notes)
+        public Order Create(Guid id, Guid customerId, string customerName, IEnumerable<OrderItem> items, string notes)
         {
-            if(items==null)
+            if(items==null||items.ToList().Count==0)
             {
                 throw new ArgumentNullException(nameof(items));
             }
+           
            var itemsList= items.ToList();
             if(!itemsList.Any())
             {
@@ -55,7 +56,7 @@ namespace Core.Services.Orders
                 _productRepository.Save(product);
             }
 
-            var id = Guid.NewGuid();
+           
             var order= _orderfactory.Create(id);
             _updateOrderService.Update(order,customerId,customerName,itemsList,notes    );
             _orderRepository.Save(order);

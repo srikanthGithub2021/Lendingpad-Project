@@ -7,7 +7,7 @@ namespace Core.Services.Orders
 {
     public interface  ICreateOrderService
     {
-        Order Create(Guid customerId,string customerName,IEnumerable<OrderItem> items,string notes);
+        Order Create(Guid id, Guid customerId,string customerName,IEnumerable<OrderItem> items,string notes);
        
     }
 }

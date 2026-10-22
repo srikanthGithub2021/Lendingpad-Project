@@ -93,14 +93,17 @@ namespace WebApi.Controllers
             
             if (string.IsNullOrWhiteSpace(tag))
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Tag cannot be empty.");
+                  
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Tag cannot be empty.");
+
             }
             // Replace this with your actual data repository or service call
             var users = _getUserService.GetUsersByTag(tag);
-            if (users == null || !users.Any())
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"No users found for tag: {tag}");
-            }
+            //if (users == null || !users.Any())
+            //{
+            //    return DoesNotExist($"No users found for tag: {tag}");
+               
+            //}
 
             return Request.CreateResponse(HttpStatusCode.OK, users);
 

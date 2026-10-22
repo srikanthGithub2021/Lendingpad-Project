@@ -27,15 +27,17 @@ namespace Core.Services.Orders
 
             var order =  ((IRepository<Order>)_orderRepository).Get(id);
 
-            if (order == null)
-                throw new KeyNotFoundException("Order not found");
+            //if (order == null)
+            //    throw new KeyNotFoundException("Order not found");
 
             return order;
         }
 
         public IEnumerable<Order> GetOrders()
         {
-            throw new NotImplementedException();
+            return _orderRepository.Get();
         }
+
+        
     }
 }

@@ -11,7 +11,7 @@ namespace WebApi.Models.Orders
     {
         public Guid CustomerId { get; set; }
         public string CustomerName { get; set; }
-        public List<OrderItemData> Items { get; set; }
+        public List<OrderItemModel> Items { get; set; }
         public string Notes { get; set; }
     }
 }
