@@ -19,18 +19,28 @@ namespace WebApi.Controllers
         private readonly ICreateProductService _createProductService;
         private readonly IUpdateProductService _updateProductService;
         private readonly IGetProductService _getProductService;
+        private readonly IDeleteProductService _deleteProductService;
 
-        public ProductController(ICreateProductService createProductService, IUpdateProductService updateProductService, IGetProductService getProductService)
+
+        public ProductController(ICreateProductService createProductService, IUpdateProductService updateProductService, IGetProductService getProductService, IDeleteProductService deleteProductService)
         {
             _createProductService = createProductService;
             _updateProductService = updateProductService;
             _getProductService = getProductService;
+            _deleteProductService = deleteProductService;
         }
         [Route("{productId:guid}/create")]
         [HttpPost]
         public HttpResponseMessage CreateProduct(Guid productId, [FromBody] ProductModel model)
         {
-            var product = _createProductService.Create(productId, model.ProductName, model.Description, model.Price, model.Category, model.StockQuantity, model.IsActive);
+            var product = _getProductService.GetProduct(productId);
+            if (product != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Product already exist for productId: {productId}");
+               
+            }
+           
+            product= _createProductService.Create(productId, model.ProductName, model.Description, model.Price, model.Category, model.StockQuantity, model.IsActive);
             return Found(new ProductData(product));
 
         }
@@ -81,6 +91,30 @@ namespace WebApi.Controllers
 
             return Found(products);
 
+        }
+
+        [Route("Clear")]
+        [HttpDelete]
+        public HttpResponseMessage DeleteAllProducts(bool confirm=false)
+        {
+            _deleteProductService.DeleteAll(confirm);
+            return Found();
+
+        }
+
+        [Route("{productId:guid}/delete")]
+        [HttpDelete]
+        public HttpResponseMessage DeletePrduct(Guid productId)
+        {
+            var product=_getProductService.GetProduct(productId);
+            if (product == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"No Product found for productId: {productId}");
+            }
+
+            _deleteProductService.Delete(product);
+            return Request.CreateResponse(HttpStatusCode.NotFound, $"Product deleted successfully  for productId: {productId}");
+            
         }
 
     }
