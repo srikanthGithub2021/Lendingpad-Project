@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BusinessEntities;
@@ -89,7 +90,23 @@ namespace WebApi.Controllers
         [HttpGet]
         public HttpResponseMessage GetUsersByTag(string tag)
         {
-            throw new NotImplementedException();
+            
+            if (string.IsNullOrWhiteSpace(tag))
+            {
+                  
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Tag cannot be empty.");
+
+            }
+            // Replace this with your actual data repository or service call
+            var users = _getUserService.GetUsersByTag(tag);
+            //if (users == null || !users.Any())
+            //{
+            //    return DoesNotExist($"No users found for tag: {tag}");
+               
+            //}
+
+            return Request.CreateResponse(HttpStatusCode.OK, users);
+
         }
     }
 }
