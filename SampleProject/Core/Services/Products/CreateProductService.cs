@@ -22,10 +22,10 @@ namespace Core.Services.Products
             _updateProductService = updateProductService;
         }
 
-        public Product Create(Guid id, string productName, string description, decimal? price, ProductCategory category, int StockQuantity, bool isActive)
+        public Product Create(Guid id, string productName, string description, decimal? price, ProductCategory category, int StockQuantity, bool isActive,string vendingSlot="")
         {
             var product = _productFactory.Create(id);
-            _updateProductService.Update(product, productName, description, price, category, StockQuantity, isActive);
+            _updateProductService.Update(product, productName, description, price, category, StockQuantity, isActive, vendingSlot);
             _productRepository.Save(product);
 
             return product;

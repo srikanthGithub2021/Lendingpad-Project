@@ -9,7 +9,7 @@ namespace Core.Services.Products
     [AutoRegister]
     public class UpdateProductService:IUpdateProductService
     {
-        public void Update(Product product, string productName, string description, decimal? price, ProductCategory category, int StockQuantity, bool isActive=false)
+        public void Update(Product product, string productName, string description, decimal? price, ProductCategory category, int StockQuantity, bool isActive=false,  string vendingSlot = "")
         {
             product.SetProductName(productName);
             product.SetDescription(description);
@@ -17,6 +17,7 @@ namespace Core.Services.Products
             product.SetCategory(category);
             product.SetStockQuantity(StockQuantity);
             product.SetIsActive(isActive);
+            product.SetVendingSlot(vendingSlot);
         }
     }
 }

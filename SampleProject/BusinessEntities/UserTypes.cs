@@ -4,6 +4,7 @@
     {
         Admin = 1,
         Employee = 2,
-        Customer = 3
+        Customer = 3,
+        Stocker=4
     }
 }

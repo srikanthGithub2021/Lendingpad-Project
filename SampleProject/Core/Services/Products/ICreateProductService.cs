@@ -8,6 +8,6 @@ namespace Core.Services.Products
     public interface ICreateProductService
     {
        
-        Product Create(Guid id, string productName, string description, decimal? price, ProductCategory category, int StockQuantity, bool isActive);
+        Product Create(Guid id, string productName, string description, decimal? price, ProductCategory category, int StockQuantity, bool isActive, string vendingSlot = "");
     }
 }

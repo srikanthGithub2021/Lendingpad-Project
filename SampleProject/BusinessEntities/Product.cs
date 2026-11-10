@@ -12,6 +12,7 @@ namespace BusinessEntities
         private decimal? _price;
         private ProductCategory _category;
         private int _stockQuantity;
+        private string _vendingSlot="";
         private bool _isActive;
 
 
@@ -50,6 +51,16 @@ namespace BusinessEntities
         {
             get => _isActive;
             private set => _isActive = value;
+        }
+        public string VendingSlot
+        {
+            get => _vendingSlot;
+            private set => _vendingSlot = value;
+        }
+        public void SetVendingSlot(string vendingSlot)
+        {
+            
+            _vendingSlot = vendingSlot;
         }
 
         public void SetProductName(string productName)

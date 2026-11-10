@@ -62,5 +62,10 @@ namespace Core.Services.Orders
             _orderRepository.Save(order);
             return order;
         }
+
+        public Order VendingMachineOrderCreate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
