@@ -6,9 +6,12 @@ namespace BusinessEntities
 {
     public class VendingMachineUser
     {
-        private string _name;
-        private UserTypes _type = UserTypes.Employee;
-        private bool _isActive;
-        private VendingMachine vendingMachine;
+
+        public string Name { get; set; } = "";
+        public UserTypes UserType { get; set; }
+        public bool IsActive { get; set; } = true;
+        public int UserTimeOutInSeconds { get; set; }
+
+
     }
 }

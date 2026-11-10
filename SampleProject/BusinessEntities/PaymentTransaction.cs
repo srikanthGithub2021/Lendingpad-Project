@@ -13,6 +13,6 @@ namespace BusinessEntities
         public decimal ProvidedAmount { get; set; }
         public decimal ChangeGiven { get; set; }
         public bool IsSuccess { get; set; }
-        public string AuthCode { get; set; } = string.Empty;
+        public string StatusMessage { get; set; }
     }
 }

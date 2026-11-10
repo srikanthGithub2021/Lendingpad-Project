@@ -6,8 +6,9 @@ namespace BusinessEntities
 {
     public class VendingMachine
     {
-        private string _name;
-        private bool _balance ;
-        private bool _isActive;
+        public Guid VendingMachineId { get; set; } = Guid.NewGuid();
+        public bool IsActive { get; set; }
+        public decimal Balance { get; set; } // Current physical/cash float inside machine
+        public DateTime StockDate { get; set; }
     }
 }
